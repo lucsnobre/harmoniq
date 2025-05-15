@@ -1,0 +1,133 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@font-face {
+  font-family: 'Segoe UI';
+  src: url('https://db.onlinewebfonts.com/t/623c7118249e082fe87a78e08506cb4b.eot');
+  src: url('https://db.onlinewebfonts.com/t/623c7118249e082fe87a78e08506cb4b.eot?#iefix') format('embedded-opentype'),
+       url('https://db.onlinewebfonts.com/t/623c7118249e082fe87a78e08506cb4b.woff2') format('woff2'),
+       url('https://db.onlinewebfonts.com/t/623c7118249e082fe87a78e08506cb4b.woff') format('woff'),
+       url('https://db.onlinewebfonts.com/t/623c7118249e082fe87a78e08506cb4b.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@layer base {
+  :root {
+    --background: 210 33% 98%;
+    --foreground: 210 25% 20%;
+  }
+
+  .dark {
+    --background: 210 33% 10%;
+    --foreground: 210 20% 98%;
+  }
+
+  html {
+    @apply bg-gradient-to-br from-aero-blue-light via-white to-aero-cyan-light dark:from-aero-blue-dark dark:via-slate-900 dark:to-aero-cyan-dark;
+    min-height: 100vh;
+  }
+
+  body {
+    @apply font-sans text-slate-800 dark:text-slate-200 bg-transparent;
+    overflow-x: hidden;
+  }
+
+  .text-foreground {
+    color: hsl(var(--foreground));
+  }
+
+  /* Custom scrollbar */
+  ::-webkit-scrollbar {
+    width: 12px;
+  }
+
+  ::-webkit-scrollbar-track {
+    @apply bg-glass rounded-full;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    @apply bg-aero-blue rounded-full border-2 border-glass-light;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    @apply bg-aero-blue-dark;
+  }
+
+  /* Custom cursor */
+  * {
+    cursor: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%2367A9D7' stroke-width='2'><circle cx='12' cy='12' r='10' fill-opacity='0.3' fill='white'/><path d='M12 6v12M6 12h12' stroke-opacity='0.8'/></svg>") 12 12, auto;
+  }
+
+  button, a, [role="button"], input, select {
+    cursor: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='28' height='28' viewBox='0 0 24 24' fill='none' stroke='%236CD9A0' stroke-width='2'><circle cx='12' cy='12' r='10' fill-opacity='0.4' fill='white'/><path d='M12 6v12M6 12h12' stroke-opacity='0.9'/></svg>") 14 14, pointer;
+  }
+}
+
+@layer components {
+  /* Glassmorphism */
+  .glass {
+    @apply bg-glass backdrop-blur-aero border border-white/20 dark:border-white/10;
+  }
+
+  .glass-card {
+    @apply glass rounded-aero shadow-aero;
+  }
+
+  .glass-button {
+    @apply glass px-4 py-2 rounded-aero shadow-aero-button
+      hover:shadow-aero hover:scale-105 active:scale-95
+      transition-all duration-300 ease-in-out;
+  }
+
+  /* Player controls */
+  .player-control {
+    @apply w-10 h-10 flex items-center justify-center rounded-full
+      bg-gradient-to-br from-aero-blue-light to-aero-blue
+      text-white shadow-aero-button
+      hover:shadow-aero hover:from-aero-blue to-aero-blue-dark
+      active:scale-95 transition-all duration-200;
+  }
+
+  /* Progress bar */
+  .progress-bar {
+    @apply h-2 rounded-full bg-glass w-full overflow-hidden;
+  }
+
+  .progress-bar-fill {
+    @apply h-full bg-gradient-to-r from-aero-blue-light to-aero-cyan rounded-full;
+  }
+
+  /* Card effects */
+  .card-hover {
+    @apply transition-all duration-300 ease-in-out;
+  }
+
+  .card-hover:hover {
+    @apply transform -translate-y-2 shadow-aero;
+  }
+
+  .card-hover:hover::before {
+    content: '';
+    @apply absolute inset-0 bg-gradient-to-br from-white/20 to-transparent rounded-aero;
+    z-index: -1;
+  }
+
+  /* Ripple effect */
+  .ripple {
+    @apply absolute bg-white/20 rounded-full pointer-events-none animate-ripple;
+    transform-origin: center;
+  }
+}
+
+@layer utilities {
+  .text-shadow-glow {
+    text-shadow: 0 0 10px rgba(103, 169, 215, 0.5);
+  }
+
+  .backdrop-saturate {
+    backdrop-filter: saturate(180%) blur(10px);
+  }
+}
